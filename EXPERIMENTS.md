@@ -63,3 +63,31 @@ Fine-tune base, lr 1e-5, EMA 0.999, bs 12, 6000 steps. Sweep (500 gen vs 1200 al
   ft512 (strong FID/KID) cannot hurt the IS (4.17) / TopPR (0.91) bests from earlier subs.
 - Ablation for report: v1 center-crop (hurt, FID 69 leaderboard) vs v2 aligned+filtered;
   source-resolution effect (256 aligned: 5318 kept; 512 aligned: 7214 kept, sharper).
+
+## v2 leaderboard (submission #530)
+ft_aligned512 step4000_ema, DDIM 100, seed 20260610:
+  FID 69.39, IS 3.29, KID 0.0368, TopPR 0.808  -> still ~69, no better than v1.
+
+## Gentle fine-tune (lr 1e-6, 2000 steps)
+Hypothesis: very low lr preserves base quality while nudging toward CelebV-HQ.
+Result: samples converged to the same degraded CelebV-HQ look as the aggressive run
+(seed-shared structure + same data). 2000 steps even at 1e-6 is enough to import the
+data's quality defects -> no clean "near-base" regime reachable from this data.
+
+## v3: GFPGAN restoration (submission #551)
+Post-process v2 outputs with GFPGAN v1.4 (CPU, isolated venv; patched basicsr's
+removed torchvision.functional_tensor import). 1000/1000 faces restored, 512px.
+Leaderboard: FID 79.84, IS 3.56, KID 0.0501, TopPR 0.762 -> WORSE than v2 (69.4).
+Lesson: GFPGAN imprints an FFHQ-idealized texture = a new distribution shift away
+from CelebV-HQ. Perceptual cleanliness != lower FID.
+
+## Leaderboard mechanic (observed)
+Standing uses each team's single best-total submission (NOT per-metric cherry-pick):
+our v1 IS 4.17 > displayed 3.81, yet 3.81 (from the old best-total sub) is shown.
+So improving rank needs ONE submission balanced-better across all 4 metrics.
+
+## Bottom line
+All self-fine-tuned variants (v1/v2/v3) score FID 69-80, worse than the team's
+pre-existing best (45.43). Raw base is disallowed (integrity). With the only freely
+available (re-encoded) CelebV-HQ frames, we cannot beat 45 this cycle. Current best
+(FID 45.43, TopPR 0.9116, rank ~26/43) stands. Value delivered: the failure analysis.

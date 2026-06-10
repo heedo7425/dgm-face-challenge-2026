@@ -10,8 +10,10 @@ Submissions made this session (leaderboard scores):
        FID 69.56  IS 4.17  KID 0.0397
   #2 (v2, FFHQ-aligned+filtered 512-source data, ft_aligned512 step4000_ema, 100 steps):
        FID 69.39  IS 3.29  KID 0.0368  TopPR 0.808
-  (base CelebA-HQ at 250 steps was NOT submitted: raw pretrained output is disallowed
-   by the academic-integrity rule; only self-fine-tuned models may be submitted.)
+  #3 (v3 = v2 outputs post-processed with GFPGAN v1.4 face restoration, 512px):
+       FID 79.84  IS 3.56  KID 0.0501  TopPR 0.762   (restoration hurt FID)
+  (base CelebA-HQ was NOT submitted: raw pretrained output is disallowed by the
+   academic-integrity rule; only self-fine-tuned models may be submitted.)
 
 Finding: fine-tuning on the freely available (re-encoded) CelebV-HQ frames consistently
 scores ~69 FID, worse than the team's pre-existing best (FID 45.43), because that data is

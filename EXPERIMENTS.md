@@ -81,6 +81,14 @@ Leaderboard: FID 79.84, IS 3.56, KID 0.0501, TopPR 0.762 -> WORSE than v2 (69.4)
 Lesson: GFPGAN imprints an FFHQ-idealized texture = a new distribution shift away
 from CelebV-HQ. Perceptual cleanliness != lower FID.
 
+## v4: weight interpolation (Wise-FT), submission #561
+theta = 0.75*base + 0.25*ft_aligned512_step4000 (blend_weights.py), DDIM 250 steps.
+Hoped to dial quality back toward base while keeping a mild CelebV-HQ shift.
+Leaderboard: FID 81.27, IS 2.82, KID 0.0509, TopPR 0.625 -> WORSE than BOTH endpoints
+(base ~45, full-ft 69). IS collapsed (2.82). The two diffusion-UNet checkpoints are not
+linearly mode-connected; weight averaging fell into a degraded basin. Wise-FT intuition
+from CLIP classifiers does not transfer to these generative weights.
+
 ## Leaderboard mechanic (observed)
 Standing uses each team's single best-total submission (NOT per-metric cherry-pick):
 our v1 IS 4.17 > displayed 3.81, yet 3.81 (from the old best-total sub) is shown.

@@ -12,6 +12,8 @@ Submissions made this session (leaderboard scores):
        FID 69.39  IS 3.29  KID 0.0368  TopPR 0.808
   #3 (v3 = v2 outputs post-processed with GFPGAN v1.4 face restoration, 512px):
        FID 79.84  IS 3.56  KID 0.0501  TopPR 0.762   (restoration hurt FID)
+  #4 (v4 = weight interpolation 0.75*base + 0.25*ft_aligned512_step4000, DDIM 250):
+       FID 81.27  IS 2.82  KID 0.0509  TopPR 0.625   (worse than both endpoints)
   (base CelebA-HQ was NOT submitted: raw pretrained output is disallowed by the
    academic-integrity rule; only self-fine-tuned models may be submitted.)
 

@@ -1,0 +1,23 @@
+DGM Spring 2026 Face Challenge — submission provenance (Heedo_Kim, team_id 24, competition 2)
+
+Base model : google/ddpm-ema-celebahq-256 (UNet2DModel, CelebA-HQ 256, unconditional)
+Fine-tune  : DDPM eps-pred, AdamW, bf16, grad-ckpt, EMA decay 0.999, batch 12 (RTX 5060 Ti)
+Sampler    : DDIM, eta=0.0, fixed seed 20260610
+Repro seeds: fine-tune seed 1234; sampling seed 20260610
+
+Submissions made this session (leaderboard scores):
+  #1 (v1, center-crop data, ft step5000_ema, 100 steps):
+       FID 69.56  IS 4.17  KID 0.0397
+  #2 (v2, FFHQ-aligned+filtered 512-source data, ft_aligned512 step4000_ema, 100 steps):
+       FID 69.39  IS 3.29  KID 0.0368  TopPR 0.808
+  (base CelebA-HQ at 250 steps was NOT submitted: raw pretrained output is disallowed
+   by the academic-integrity rule; only self-fine-tuned models may be submitted.)
+
+Finding: fine-tuning on the freely available (re-encoded) CelebV-HQ frames consistently
+scores ~69 FID, worse than the team's pre-existing best (FID 45.43), because that data is
+lower quality than the curated "HQ" eval set. See report / EXPERIMENTS.md.
+
+Reproduce the v2 (aligned) submission images:
+  python sample.py --unet ft_aligned512/unet_step4000_ema \
+      --sched_src google/ddpm-ema-celebahq-256 \
+      --out submission_images_v2 --n 1000 --bs 25 --steps 100 --eta 0.0 --seed 20260610

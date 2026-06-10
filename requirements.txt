@@ -1,0 +1,18 @@
+# Install torch/torchvision from the CUDA 12.8 index (Blackwell sm_120 support):
+#   pip install torch==2.11.0+cu128 torchvision==0.26.0+cu128 \
+#       --index-url https://download.pytorch.org/whl/cu128
+# Then the rest from PyPI:
+torch==2.11.0+cu128
+torchvision==0.26.0+cu128
+diffusers==0.38.0
+accelerate==1.13.0
+transformers==5.10.2
+safetensors==0.8.0rc1
+huggingface_hub==1.18.0
+datasets==5.0.0
+av==17.1.0
+torch-fidelity==0.4.0
+scipy==1.17.1
+pillow
+numpy
+requests

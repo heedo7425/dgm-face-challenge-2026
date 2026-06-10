@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.zip
+*.log
+*.onnx
+*_images/
+*_frames*/
+aligned*/
+ref_*/
+ft_*/
+ft_ckpt/
+base_images/
+sweep_samples/
+celebvhq_frames*/
+*.jpg
+*.png
+*.json
